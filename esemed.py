@@ -1,3 +1,6 @@
+import pygame
+from seaded import KÕRGUS
+
 ESEMED = {
   "kell": {
     "nimi": "Kellakeeramine",
@@ -5,7 +8,7 @@ ESEMED = {
     "värv": (255, 200, 50)
   },
   "kodutöö": {
-      "name": "Hilinenud kodutöö",
+      "nimi": "Hilinenud kodutöö",
       "punktid": -25,
       "värv": (255, 130, 50)
   },
@@ -30,3 +33,32 @@ ESEMED = {
       "värv": (220, 170, 255)
   }
 }
+
+class Ese:
+  def __init__(self, liik, x, y):
+    andmed = ESEMED[liik]
+
+    self.liik = liik
+    self.nimi = andmed["nimi"]
+    self.punktid = andmed["punktid"]
+    self.varv = andmed["värv"]
+
+    # Eseme suurus ja asukoht
+    self.rect = pygame.Rect(x, y, 50, 50)
+    self.y = float(y)
+
+  def liiguta(self, kiirus, dt):
+    # Liigutame eset allapoole
+    self.y += kiirus * dt
+    self.rect.y = round(self.y)
+
+  def joonista(self, ekraan):
+    # Joonistame eseme ekraanile
+    pygame.draw.rect(
+        ekraan,
+        self.varv,
+        self.rect
+    )
+
+  def ekraanilt_valjas(self):
+      return self.rect.top > KÕRGUS
