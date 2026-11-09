@@ -1,0 +1,12 @@
+# Pythoni virtuaalne keskkond
+.venv/
+
+# Pythoni ajutised failid
+__pycache__/
+*.pyc
+
+# macOS failid
+.DS_Store
+
+# VS Code'i lokaalsed seaded
+.vscode/
