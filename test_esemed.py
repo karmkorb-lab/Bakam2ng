@@ -53,12 +53,16 @@ while tootab:
     # Loendame, kui palju aega on möödunud
     ilmumise_aeg += dt
 
-    # Iga 1.5 sekundi tagant ilmub uus ese
-    if ilmumise_aeg >= 1.5:
-        liik = random.choice([
-            "kell", "kodutöö", "eksam",
-            "kohv", "redbull", "stipp"
-        ])
+    
+    # Iga 1.0 sekundi tagant ilmub uus ese
+    if ilmumise_aeg >= 1.0:
+        liik = random.choices(
+            ["kell", "kodutöö", "eksam", "kohv", "redbull"],
+            weights=[30, 25, 15, 15, 15],
+            k=1
+        )[0]
+
+        uus_ese = Ese(liik, 0, -90)
 
         # Juhuslik horisontaalne asukoht
         x = random.randint(0, LAIUS - 50)
@@ -72,7 +76,7 @@ while tootab:
 
     # Liigutame ja joonistame koik esemed
     for ese in esemed[:]:
-        ese.liiguta(200, dt)
+        ese.liiguta(250, dt)
         ese.joonista(ekraan)
 
         # Eemaldame ekraanilt kadunud esemed
