@@ -44,7 +44,14 @@ class Ese:
     self.varv = andmed["värv"]
 
     # Eseme suurus ja asukoht
-    self.rect = pygame.Rect(x, y, 50, 50)
+    # Takistused on suuremad kui booster'id
+    if self.punktid < 0:
+        suurus = 90
+    else:
+        suurus = 40
+
+    self.rect = pygame.Rect(x, y, suurus, suurus)
+    
     self.y = float(y)
 
   def liiguta(self, kiirus, dt):
