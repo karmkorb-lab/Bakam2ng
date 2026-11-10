@@ -7,14 +7,6 @@ Kirjeldus:
 See moodul sisaldab mängus kasutatavate takistuste
 ja booster'ite andmeid ning Ese klassi, mis võimaldab
 esemeid luua, liigutada ja ekraanile joonistada.
-
-Kasutatud vahendid:
-- Python
-- Pygame
-
-AI kasutamine:
-Ese klassi esialgse ülesehituse loomisel kasutati
-ChatGPT abi. Koodi katsetati ja kohandati projekti jaoks.
 """
 
 import pygame

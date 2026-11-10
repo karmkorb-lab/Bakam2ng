@@ -1,3 +1,19 @@
+"""
+Projekt: Bakamäng
+Autorid: Merilin-Grete Kakko, Karm Korb
+Fail: test_esemed.py
+
+Kirjeldus:
+Testprogramm takistuste ja boosterite funktsionaalsuse
+kontrollimiseks. Võimaldab testida esemete juhuslikku ilmumist,
+liikumist, mängijaga kokkupõrkeid ja punktiarvestust.
+Sisaldab ka stipendiumi ühekordse ilmumise kontrolli.
+
+Testprogramm töötab põhimängust eraldiseisvalt.
+"""
+
+import random
+
 import pygame
 import random
 from esemed import Ese

@@ -1,3 +1,14 @@
+"""
+Projekt: Bakamäng
+Autorid: Merilin-Grete Kakko, Karm Korb
+Fail: punktid.py
+
+Kirjeldus:
+Moodul sisaldab mängija ja esemete kokkupõrgete kontrollimist
+ning kokkupõrgetest saadud või kaotatud punktide arvestust.
+Tagastab punktide muutuse ja vastava teate mängijale.
+"""
+
 def kontrolli_kokkuporkeid(mangija_rect, esemed):
     """Kontrollib kokkupõrkeid ja tagastab punktid ning teate."""
     punktide_muutus = 0
