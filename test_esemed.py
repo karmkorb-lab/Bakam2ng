@@ -29,6 +29,9 @@ punktid = 0
 # Punktide kuvamiseks kasutatav font
 font = pygame.font.SysFont("arial", 28)
 
+teade = ""
+teate_lopp = 0
+teate_varv = (255, 255, 255)
 
 while tootab:
     dt = taimer.tick(FPS) / 1000
@@ -99,7 +102,22 @@ while tootab:
             esemed.remove(ese)
 
     # Kontrollime kokkupõrkeid
-    punktid += kontrolli_kokkuporkeid(mangija, esemed)
+    muutus, uus_teade = kontrolli_kokkuporkeid(
+      mangija, esemed
+    )
+
+    punktid += muutus
+
+    if uus_teade is not None:
+        teade = uus_teade
+
+        # Näitame teadet ühe sekundi
+        teate_lopp = pygame.time.get_ticks() + 1000
+
+        if muutus >= 0:
+            teate_varv = (80, 220, 120)
+        else:
+            teate_varv = (255, 80, 80)
 
     # Joonistame mängija valge ruuduna
     pygame.draw.rect(ekraan, (255, 255, 255), mangija)
@@ -112,6 +130,16 @@ while tootab:
     )
 
     ekraan.blit(punktide_tekst, (20, 20)) 
+
+    # Kuvame viimase kokkupõrke teadet ühe sekundi
+    if pygame.time.get_ticks() < teate_lopp:
+        teate_tekst = font.render(
+            teade,
+            True,
+            teate_varv
+        )
+
+        ekraan.blit(teate_tekst, (20, 60))
 
     pygame.display.flip()
 
