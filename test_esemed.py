@@ -14,6 +14,11 @@ taimer = pygame.time.Clock()
 esemed = []
 ilmumise_aeg = 0
 
+# Stipendiumi ilmumise kontroll
+leveli_aeg = 0
+stipp_ilmunud = False
+STIPI_ILMUMISE_AEG = 10
+
 tootab = True
 
 
@@ -55,6 +60,25 @@ while tootab:
 
     # Loendame, kui palju aega on möödunud
     ilmumise_aeg += dt
+    leveli_aeg += dt
+
+    # Stipendium ilmub ainult üks kord
+    if leveli_aeg >= STIPI_ILMUMISE_AEG and not stipp_ilmunud:
+
+      # Loome stipendiumi
+      stipendium = Ese("stipp", 0, -40)
+
+      # Valime juhusliku asukoha
+      stipendium.rect.x = random.randint(
+          0,
+          LAIUS - stipendium.rect.width
+      )
+
+      # Lisame stipendiumi mängu
+      esemed.append(stipendium)
+
+      # Märgime, et stipendium on juba ilmunud
+      stipp_ilmunud = True
 
     
     # Iga 1.0 sekundi tagant ilmub uus ese
@@ -85,16 +109,11 @@ while tootab:
         esemed.append(uus_ese)
         ilmumise_aeg = 0
 
-
-        esemed.append(uus_ese)
-
-        ilmumise_aeg = 0
-
     ekraan.fill((20, 20, 20))
 
     # Liigutame ja joonistame koik esemed
     for ese in esemed[:]:
-        ese.liiguta(250, dt)
+        ese.liiguta(300, dt)
         ese.joonista(ekraan)
 
         # Eemaldame ekraanilt kadunud esemed
