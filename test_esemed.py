@@ -2,6 +2,7 @@ import pygame
 import random
 from esemed import Ese
 from seaded import LAIUS, KÕRGUS, FPS
+from punktid import kontrolli_kokkuporkeid
 
 pygame.init()
 
