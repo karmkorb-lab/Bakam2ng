@@ -64,10 +64,25 @@ while tootab:
 
         uus_ese = Ese(liik, 0, -90)
 
-        # Juhuslik horisontaalne asukoht
-        x = random.randint(0, LAIUS - 50)
+        # Takistused ilmuvad enamasti mängija teele
+        if uus_ese.punktid < 0 and random.random() < 0.75:
+            x = mangija.centerx - uus_ese.rect.width // 2
+        else:
+            # Booster'id ja osa takistusi ilmuvad juhuslikult
+            x = random.randint(
+                0, LAIUS - uus_ese.rect.width
+            )
 
-        uus_ese = Ese(liik, x, -50)
+        # Hoiame eseme täielikult mänguakna sees
+        uus_ese.rect.x = max(
+            0,
+            min(x, LAIUS - uus_ese.rect.width)
+        )
+
+        esemed.append(uus_ese)
+        ilmumise_aeg = 0
+
+
         esemed.append(uus_ese)
 
         ilmumise_aeg = 0
