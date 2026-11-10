@@ -1,3 +1,25 @@
+"""
+Projekt: Bakamäng
+Autorid: Merilin-Grete Kakko, Karm Korb
+Fail: esemed.py
+
+Kirjeldus:
+See moodul sisaldab mängus kasutatavate takistuste
+ja booster'ite andmeid ning Ese klassi, mis võimaldab
+esemeid luua, liigutada ja ekraanile joonistada.
+
+Kasutatud vahendid:
+- Python
+- Pygame
+
+AI kasutamine:
+Ese klassi esialgse ülesehituse loomisel kasutati
+ChatGPT abi. Koodi katsetati ja kohandati projekti jaoks.
+"""
+
+import pygame
+from seaded import KÕRGUS
+
 import pygame
 from seaded import KÕRGUS
 
@@ -35,7 +57,11 @@ ESEMED = {
 }
 
 class Ese:
+  """Mängus kasutatav takistus või boonusese."""
+
   def __init__(self, liik, x, y):
+    """Loob eseme ning määrab selle omadused ja asukoha."""
+
     andmed = ESEMED[liik]
 
     self.liik = liik
@@ -55,12 +81,14 @@ class Ese:
     self.y = float(y)
 
   def liiguta(self, kiirus, dt):
-    # Liigutame eset allapoole
+    """Liigutab eset allapoole vastavalt kiirusele ja ajale."""
+
     self.y += kiirus * dt
     self.rect.y = round(self.y)
 
   def joonista(self, ekraan):
-    # Joonistame eseme ekraanile
+    """Joonistab eseme mänguaknasse."""
+
     pygame.draw.rect(
         ekraan,
         self.varv,
@@ -68,4 +96,6 @@ class Ese:
     )
 
   def ekraanilt_valjas(self):
-      return self.rect.top > KÕRGUS
+    """Kontrollib, kas ese on mänguaknast väljunud."""
+
+    return self.rect.top > KÕRGUS
