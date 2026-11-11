@@ -1,4 +1,12 @@
-#Siia tuleb kood informaatikatudengi tegelasest
+"""
+Projekt: Bakamäng
+Autorid: Merilin-Grete Kakko, Karm Korb
+Fail: seaded.py
+
+Kirjeldus:
+Siia faili tuleb kood mängija käitumise kohta mängus.
+"""
+
 import pygame
 
 from seaded import *

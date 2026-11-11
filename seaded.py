@@ -1,4 +1,11 @@
-# Siia tuleb kood, mis määrab mänguakna, kiirused ja elude arvu
+"""
+Projekt: Bakamäng
+Autorid: Merilin-Grete Kakko, Karm Korb
+Fail: seaded.py
+
+Kirjeldus:
+Siia faili tulevad erinevad konstandid.
+"""
 
 #Ekraani mõõtmed pikslites
 LAIUS = 800
