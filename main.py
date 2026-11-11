@@ -1,12 +1,4 @@
-"""
-Projekt: Bakamäng
-Autorid: Merilin-Grete Kakko, Karm Korb
-Fail: main.py
-
-Kirjeldus:
-Informaatikatudengi ellujäämismäng (Bakamäng) - Peamoodul
-Käivitab mänguakna, haldab mängutsüklit, sündmusi ja ekraani HUD-päist.
-"""
+#Siia tuleb kood, mis käivitab kogu mängu
 
 import pygame
 import random
@@ -67,10 +59,8 @@ def main():
                     teade = ""
                     mang_labi = False
 
-        # 1. Puhastame ekraani igal kaadril uuesti
-        ekraan.fill(MUST)
-
         if not mang_labi:
+
             # Mängija liikumine
             mangija.uuenda()
 
@@ -81,14 +71,17 @@ def main():
             # Stipendiumi ilmumine pärast 10 sekundit
             if leveli_aeg >= 10 and not stipp_ilmunud:
                 stipendium = Ese("stipp", 0, -40)
+
                 stipendium.rect.x = random.randint(
                     0, LAIUS - stipendium.rect.width
                 )
+
                 esemed.append(stipendium)
                 stipp_ilmunud = True
 
             # Uue eseme genereerimine iga sekundi järel
             if ilmumise_aeg >= 1.0:
+
                 liik = random.choices(
                     ["kell", "kodutöö", "eksam", "kohv", "redbull"],
                     weights=[30, 25, 15, 15, 15],
@@ -101,9 +94,14 @@ def main():
                 if uus_ese.punktid < 0 and random.random() < 0.75:
                     x = mangija.rect.centerx - uus_ese.rect.width // 2
                 else:
-                    x = random.randint(0, LAIUS - uus_ese.rect.width)
+                    x = random.randint(
+                        0, LAIUS - uus_ese.rect.width
+                    )
 
-                uus_ese.rect.x = max(0, min(x, LAIUS - uus_ese.rect.width))
+                uus_ese.rect.x = max(
+                    0, min(x, LAIUS - uus_ese.rect.width)
+                )
+
                 esemed.append(uus_ese)
                 ilmumise_aeg = 0
 
@@ -135,41 +133,72 @@ def main():
             # Mängija joonistamine
             mangija.joonista(ekraan)
 
-            # Mängu lõpu kontroll
+            # Mängu lõpp
             if mangija.elud <= 0:
                 mang_labi = True
 
-            # --- VISUAALNE PÄIS (HUD Paneel ekraani ülaosas) ---
-            pygame.draw.rect(ekraan, (30, 30, 30), (0, 0, LAIUS, 120))
-            pygame.draw.line(ekraan, VALGE, (0, 120), (LAIUS, 120), 2)
-
-            punktide_tekst = font.render(f"Punktid: {punktid}", True, VALGE)
-            elude_tekst = font.render(f"Elud: {mangija.elud}", True, VALGE)
-
-            ekraan.blit(punktide_tekst, (20, 15))
-            ekraan.blit(elude_tekst, (20, 50))
-
-            if pygame.time.get_ticks() < teate_lopp:
-                teate_tekst = font.render(teade, True, teate_varv)
-                ekraan.blit(teate_tekst, (20, 85))
-
         else:
-            # Mängu lõpu ekraan
-            lopp_tekst = suur_font.render("MÄNG LÄBI!", True, PUNANE)
-            punkt_tekst = font.render(f"Lõppskoor: {punktid}", True, VALGE)
-            uuesti_tekst = font.render("Vajuta R, et uuesti alustada", True, VALGE)
+            ekraan.fill(MUST)
+
+        # Ekraani taust
+        if not mang_labi:
+            ekraan.fill(MUST)
+
+            # Joonistame mängija ja esemed uuesti taustale
+            # (täpne joonistamise järjekord on allpool)
+
+            mangija.joonista(ekraan)
+
+            for ese in esemed:
+                ese.joonista(ekraan)
+
+        # Punktid ja elud
+        punktide_tekst = font.render(
+            f"Punktid: {punktid}", True, VALGE
+        )
+        elude_tekst = font.render(
+            f"Elud: {mangija.elud}", True, VALGE
+        )
+
+        ekraan.blit(punktide_tekst, (20, 20))
+        ekraan.blit(elude_tekst, (20, 55))
+
+        # Kokkupõrketeade
+        if pygame.time.get_ticks() < teate_lopp:
+            teate_tekst = font.render(
+                teade, True, teate_varv
+            )
+            ekraan.blit(teate_tekst, (20, 95))
+
+        # Mängu lõpu ekraan
+        if mang_labi:
+            lopp_tekst = suur_font.render(
+                "MÄNG LÄBI!", True, PUNANE
+            )
+            punkt_tekst = font.render(
+                f"Lõppskoor: {punktid}", True, VALGE
+            )
+            uuesti_tekst = font.render(
+                "Vajuta R, et uuesti alustada", True, VALGE
+            )
 
             ekraan.blit(
                 lopp_tekst,
-                lopp_tekst.get_rect(center=(LAIUS // 2, KÕRGUS // 2 - 60))
+                lopp_tekst.get_rect(
+                    center=(LAIUS // 2, KÕRGUS // 2 - 60)
+                )
             )
             ekraan.blit(
                 punkt_tekst,
-                punkt_tekst.get_rect(center=(LAIUS // 2, KÕRGUS // 2))
+                punkt_tekst.get_rect(
+                    center=(LAIUS // 2, KÕRGUS // 2)
+                )
             )
             ekraan.blit(
                 uuesti_tekst,
-                uuesti_tekst.get_rect(center=(LAIUS // 2, KÕRGUS // 2 + 60))
+                uuesti_tekst.get_rect(
+                    center=(LAIUS // 2, KÕRGUS // 2 + 60)
+                )
             )
 
         pygame.display.flip()
@@ -179,3 +208,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
