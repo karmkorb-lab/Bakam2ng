@@ -2,7 +2,7 @@
 
 ## Projekti kirjeldus
 
-Bakamäng on Pythonis ja Pygame'i abil loodud lihtne arkaadmäng, kus mängija peab vältima ülevalt langevaid takistusi ja koguma boonuseid. Mängija saab liikuda vasakule ja paremale klaviatuuri A/D või nooleklahvide abil. Takistusega kokkupõrge vähendab elude arvu, boonuste kogumine annab punkte. Mäng lõpeb kolme elu kaotamisel.
+Bakamäng on Pythonis ja Pygame'i abil loodud lihtne arkaadmäng, kus mängija peab vältima erinevaid takistusi, mis õppetööl ette tulevad. 
 
 Projekt on loodud Tartu Ülikooli programmeerimise aine raames.
 
